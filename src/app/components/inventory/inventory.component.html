@@ -1,0 +1,56 @@
+<h2 class="section-title">Products</h2>
+<table class="table products-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Categories</th>
+      <th>Inventory</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products$ | async">
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.price }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let category of product.categories">
+            {{ category.name }} ({{ category.description }})
+          </li>
+        </ul>
+      </td>
+      <td *ngIf="product.inventory">
+        Quantity: {{ product.inventory.quantity }}
+      </td>
+      <td *ngIf="!product.inventory">No inventory</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="section-title">Transactions</h2>
+<table class="table transactions-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Product</th>
+      <th>User</th>
+      <th>Type</th>
+      <th>Quantity</th>
+      <th>Transaction Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactions$ | async">
+      <td>{{ transaction.id }}</td>
+      <td>{{ transaction.product.name }}</td>
+      <td>{{ transaction.user.name }} ({{ transaction.user.email }})</td>
+      <td>{{ transaction.type }}</td>
+      <td>{{ transaction.quantity }}</td>
+      <td>{{ transaction.transaction_date }}</td>
+    </tr>
+  </tbody>
+</table>
